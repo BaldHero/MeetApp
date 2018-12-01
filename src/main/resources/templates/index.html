@@ -1,8 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block th:include="template :: scripts_css"/>
+    <th:block th:include="template :: navigator"/>
+    <title>Index</title>
 </head>
 <body>
 <h2>This is my index</h2>
