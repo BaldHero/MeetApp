@@ -35,6 +35,7 @@ public class EmployeeService {
     public boolean checkEmail(EmployeeDto employeeDto) {
         boolean check;
         check = employeeRepository.findByEmail(employeeDto.getEmail()) != null;
+        log.info("Email check: " + check);
         return check;
     }
 }
