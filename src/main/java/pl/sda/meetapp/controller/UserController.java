@@ -4,12 +4,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.sda.meetapp.model.dto.EmployeeDto;
 import pl.sda.meetapp.repository.EmployeeRepository;
 import pl.sda.meetapp.service.EmployeeService;
+
+import javax.validation.Valid;
 
 @Controller
 @Slf4j
@@ -35,8 +38,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String postRegisterForm(EmployeeDto employeeDto) {
+    public String postRegisterForm(@Valid EmployeeDto employeeDto, BindingResult bindingResult) {
 //        System.out.println(registerEmployeeRequest);
+        if (bindingResult.hasErrors()){
+            return "redirect:/employee/register?error=";
+        }
         log.info("Request: " + employeeDto);
         if(!employeeService.checkEmail(employeeDto)) {
             employeeService.createEmployee(employeeDto);
