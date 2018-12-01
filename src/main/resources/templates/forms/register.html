@@ -8,10 +8,15 @@
 </head>
 <body>
 
+<h1>MeetApp</h1>
+<h2>User registration</h2>
+
 <form th:action="@{/employee/register}" method="post" th:object="${user_register_form}">
-    <input th:field="*{username}" th:value="*{username}">
-    <input th:field="*{password}" th:value="*{password}">
-    <input type="submit" th:value="Wyslij">
+    <input th:field="*{firstName}" placeholder="first name" th:value="*{firstName}">
+    <input th:field="*{lastName}" placeholder="last name" th:value="*{lastName}">
+    <input type="password" th:field="*{password}" placeholder="password" th:value="*{password}">
+    <input th:field="*{email}" placeholder="email" th:value="*{email}">
+    <input type="submit" th:value="Submit">
 </form>
 
 </body>
