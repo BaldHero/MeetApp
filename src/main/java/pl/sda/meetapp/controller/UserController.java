@@ -38,16 +38,18 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String postRegisterForm(@Valid EmployeeDto employeeDto, BindingResult bindingResult) {
+    public String postRegisterForm(@Valid EmployeeDto employeeDto, Model model) {
 //        System.out.println(registerEmployeeRequest);
-        if (bindingResult.hasErrors()){
-            return "redirect:/employee/register?error=";
-        }
+//        if (bindingResult.hasErrors()){
+//            return "redirect:/employee/register?error=";
+//        }
         log.info("Request: " + employeeDto);
         if(!employeeService.checkEmail(employeeDto)) {
             employeeService.createEmployee(employeeDto);
             return "redirect:/employee/register";
         }
-        return "redirect:/employee/register?error";
+        model.addAttribute("message", "Registration failed.");
+        model.addAttribute("user_register_form", employeeDto);
+        return "forms/register";
     }
 }

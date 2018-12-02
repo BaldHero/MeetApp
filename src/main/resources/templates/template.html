@@ -10,6 +10,12 @@
     <script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
 </th:block>
 
+<th:block th:fragment="messageBox">
+    <div class="message" th:if="${message}">
+        <p th:text="${message}"></p>
+    </div>
+</th:block>
+
 <th:block th:fragment="navigator">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" th:href="@{/}">MeetApp</a>
