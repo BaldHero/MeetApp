@@ -2,6 +2,7 @@ package pl.sda.meetapp.model.dto;
 
 import lombok.Data;
 import lombok.ToString;
+import pl.sda.meetapp.model.Department;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -23,5 +24,7 @@ public class EmployeeDto {
 
     @Email
     private String email;
+
+    private Department department;
 
 }

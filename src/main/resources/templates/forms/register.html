@@ -16,10 +16,21 @@
 <h2>User registration</h2>
 
 <form th:action="@{/employee/register}" method="post" th:object="${user_register_form}">
-    <input th:field="*{firstName}" placeholder="first name" th:value="*{firstName}">
-    <input th:field="*{lastName}" placeholder="last name" th:value="*{lastName}">
-    <input type="password" th:field="*{password}" placeholder="password" th:value="*{password}">
-    <input th:field="*{email}" placeholder="email" th:value="*{email}">
+    <label for="first name">First name:</label>
+    <input th:field="*{firstName}" id="first name" placeholder="first name" th:value="*{firstName}">
+    <label for="last name">Last name:</label>
+    <input th:field="*{lastName}" id="last name" placeholder="last name" th:value="*{lastName}">
+    <label for="department">Department:</label>
+    <select th:field="*{department}" id="department">
+        <option th:each="state : ${T(pl.sda.meetapp.model.Department).values()}"
+                th:value="${state}"
+                th:text="${state}">
+        </option>
+    </select>
+    <label for="password">Password:</label>
+    <input type="password" th:field="*{password}" id="password" placeholder="password" th:value="*{password}">
+    <label for="email">Email:</label>
+    <input th:field="*{email}" id="email" placeholder="email" th:value="*{email}">
     <input type="submit" th:value="Submit">
 </form>
 

@@ -5,10 +5,21 @@
 <head>
     <meta charset="UTF-8">
     <th:block th:include="template :: scripts_css"/>
-    <th:block th:include="template :: navigator"/>
-    <title>MeetApp - Login Page</title>
+    <title>MeetApp - Login</title>
 </head>
 <body>
 
+<th:block th:include="template :: navigator"/>
+
+<h1>MeetApp</h1>
+<h2>Login</h2>
+
+<form th:href="@{/employee/login}" method="post">
+    <label for="username">Email:</label>
+    <input type="text" name="username" id="username" placeholder="Email">
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" placeholder="Password">
+    <input type="submit" th:value="Submit">
+</form>
 </body>
 </html>

@@ -3,6 +3,7 @@ package pl.sda.meetapp.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.meetapp.model.Employee;
 import pl.sda.meetapp.model.dto.EmployeeDto;
@@ -13,17 +14,17 @@ import pl.sda.meetapp.repository.EmployeeRepository;
 public class EmployeeService {
 
     private EmployeeRepository employeeRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder passwordEncoder;
 
-    public EmployeeService(EmployeeRepository employeeRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public EmployeeService(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder) {
         this.employeeRepository = employeeRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
     public EmployeeDto createEmployee(EmployeeDto employeeDto) {
 
-        employeeDto.setPassword(bCryptPasswordEncoder.encode(employeeDto.getPassword()));
+        employeeDto.setPassword(passwordEncoder.encode(employeeDto.getPassword()));
 
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDto, employee);
@@ -32,10 +33,10 @@ public class EmployeeService {
         return employeeDto;
     }
 
-    public boolean checkEmail(EmployeeDto employeeDto) {
+    public boolean canIAddEmail(EmployeeDto employeeDto) {
         boolean check;
-        check = employeeRepository.findByEmail(employeeDto.getEmail()) != null;
-        log.info("Email check: " + check);
+        check = !employeeRepository.findByEmail(employeeDto.getEmail()).isPresent();
+        log.info("Email check (can add): " + check);
         return check;
     }
 }

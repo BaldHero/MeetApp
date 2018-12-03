@@ -1,10 +1,8 @@
 package pl.sda.meetapp.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,16 +35,17 @@ public class UserController {
         return "forms/register";
     }
 
+    @GetMapping("/login")
+    public String getLoginForm() {
+        return "forms/login";
+    }
+
     @PostMapping("/register")
     public String postRegisterForm(@Valid EmployeeDto employeeDto, Model model) {
-//        System.out.println(registerEmployeeRequest);
-//        if (bindingResult.hasErrors()){
-//            return "redirect:/employee/register?error=";
-//        }
         log.info("Request: " + employeeDto);
-        if(!employeeService.checkEmail(employeeDto)) {
-            employeeService.createEmployee(employeeDto);
-            return "redirect:/employee/register";
+        if(employeeService.canIAddEmail(employeeDto)) {
+                employeeService.createEmployee(employeeDto);
+            return "redirect:/employee/login";
         }
         model.addAttribute("message", "Registration failed.");
         model.addAttribute("user_register_form", employeeDto);
