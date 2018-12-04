@@ -10,6 +10,16 @@
 </head>
 <body>
 <h2>Welcome to MeetApp</h2>
-<p>Please log in or register.</p>
+
+<div th:if="!${loggedIn}" class="col-2">
+    <p>Please log in or register.</p>
+</div>
+
+<div th:if="${loggedIn}" class="col-2">
+    <div class="row table-row" th:each="employee,i : ${pizzas}">
+        <div class="col-1" th:text="${pizza.id}"></div>
+        <div class="col-3" th:text="${pizza.name}"></div>
+        <div class="col-2" th:text="${pizza.price}"></div>
+</div>
 </body>
 </html>

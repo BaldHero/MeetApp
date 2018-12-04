@@ -51,4 +51,9 @@ public class UserController {
         model.addAttribute("user_register_form", employeeDto);
         return "forms/register";
     }
+
+    @GetMapping("/profile")
+    public String getProfile() {
+        return "profile";
+    }
 }

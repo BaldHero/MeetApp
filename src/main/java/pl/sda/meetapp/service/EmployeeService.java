@@ -2,12 +2,13 @@ package pl.sda.meetapp.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.meetapp.model.Employee;
 import pl.sda.meetapp.model.dto.EmployeeDto;
 import pl.sda.meetapp.repository.EmployeeRepository;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -38,5 +39,9 @@ public class EmployeeService {
         check = !employeeRepository.findByEmail(employeeDto.getEmail()).isPresent();
         log.info("Email check (can add): " + check);
         return check;
+    }
+
+    public List<Employee> printAll() {
+        return employeeRepository.findAll();
     }
 }

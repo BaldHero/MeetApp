@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Builder
 @Data
@@ -28,9 +27,6 @@ public class Employee {
 
     @Enumerated(EnumType.STRING)
     private Department department;
-
-    @ManyToMany
-    private List<Employee> contacts;
 
     //...
 }
