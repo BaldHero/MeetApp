@@ -1,0 +1,25 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:include="template :: scripts_css"/>
+    <th:block th:include="template :: navigator"/>
+    <title>MeetApp - Profile</title>
+</head>
+<body>
+<h2>This is your profile</h2>
+
+<div th:if="!${loggedIn}" class="col-2">
+    <p>Please log in or register.</p>
+</div>
+
+<div th:if="${loggedIn}" class="col-2">
+    <div class="row table-row" th:each="employee,i : ${pizzas}">
+        <div class="col-1" th:text="${pizza.id}"></div>
+        <div class="col-3" th:text="${pizza.name}"></div>
+        <div class="col-2" th:text="${pizza.price}"></div>
+    </div>
+</body>
+</html>
