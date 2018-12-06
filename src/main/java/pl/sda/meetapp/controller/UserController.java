@@ -1,6 +1,7 @@
 package pl.sda.meetapp.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +54,11 @@ public class UserController {
     public String postRegisterForm(@Valid EmployeeDto employeeDto, Model model) {
         log.info("Request: " + employeeDto);
         if(employeeService.canIAddEmail(employeeDto)) {
-            employeeAuthService.sendNotification(employeeDto);
+            try {
+                employeeAuthService.sendNotification(employeeDto);
+            } catch (MailException e) {
+                log.error("Email could not be sent.");
+            }
             employeeService.createEmployee(employeeDto);
             return "redirect:/employee/login";
         }
