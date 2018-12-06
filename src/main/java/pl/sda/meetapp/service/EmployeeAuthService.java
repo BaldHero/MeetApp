@@ -1,5 +1,8 @@
 package pl.sda.meetapp.service;
 
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.sda.meetapp.model.Employee;
+import pl.sda.meetapp.model.dto.EmployeeDto;
 import pl.sda.meetapp.repository.EmployeeRepository;
 
 import java.util.Optional;
@@ -15,9 +19,11 @@ import java.util.Optional;
 public class EmployeeAuthService implements UserDetailsService {
 
     private EmployeeRepository employeeRepository;
+    private JavaMailSender javaMailSender;
 
-    public EmployeeAuthService(EmployeeRepository employeeRepository) {
+    public EmployeeAuthService(EmployeeRepository employeeRepository, JavaMailSender javaMailSender) {
         this.employeeRepository = employeeRepository;
+        this.javaMailSender = javaMailSender;
     }
 
     @Override
@@ -49,5 +55,15 @@ public class EmployeeAuthService implements UserDetailsService {
         }
 
         return Optional.empty();
+    }
+
+    public void sendNotification(EmployeeDto employeeDto) throws MailException {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(employeeDto.getEmail());
+        mailMessage.setFrom("meetapp.sender@gmail.com");
+        mailMessage.setSubject("Welcome to MeetApp");
+        mailMessage.setText("Thank you for registering with MeetApp!\n" +
+                "You can now log in to create new meetings.");
+        javaMailSender.send(mailMessage);
     }
 }

@@ -54,6 +54,7 @@ public class UserController {
         log.info("Request: " + employeeDto);
         if(employeeService.canIAddEmail(employeeDto)) {
                 employeeService.createEmployee(employeeDto);
+                employeeAuthService.sendNotification(employeeDto);
             return "redirect:/employee/login";
         }
         model.addAttribute("message", "Registration failed.");
