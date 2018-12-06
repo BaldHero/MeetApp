@@ -9,17 +9,13 @@
     <title>MeetApp - Profile</title>
 </head>
 <body>
-<h2>This is your profile</h2>
 
-<div th:if="!${loggedIn}" class="col-2">
-    <p>Please log in or register.</p>
+<div th:unless="${loggedIn}" class="col-2">
+    <p>Please log in or register to view your profile.</p>
+</div>
+<div th:if="${loggedIn}" class="col-2">
+    <p>This is your profile</p>
 </div>
 
-<div th:if="${loggedIn}" class="col-2">
-    <div class="row table-row" th:each="employee,i : ${pizzas}">
-        <div class="col-1" th:text="${pizza.id}"></div>
-        <div class="col-3" th:text="${pizza.name}"></div>
-        <div class="col-2" th:text="${pizza.price}"></div>
-    </div>
 </body>
 </html>

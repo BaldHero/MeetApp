@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class IndexController {
 
-    @GetMapping("/")
-    public String getIndex() {
-        return "index";
-    }
-
-    //    RequestParam -> localhost:8080/parametr?nazwa=wartosc
+//    @GetMapping("/")
+//    public String getIndex() {
+//        return "index";
+//    }
+//
+//        RequestParam -> localhost:8080/parametr?nazwa=wartosc
 //    PathVariable
-    @GetMapping("/parametr/{nejm}")
-    public String sendParam(
-            Model model,
-            @RequestParam(name = "nazwa") String nazwa,
-            @PathVariable(name = "nejm", required = true) String nejm) {
-        System.out.println(nazwa);
-
-        model.addAttribute("nazwa_atr", nazwa);
-        model.addAttribute("nejm_param", nejm);
-
-        return "param";
-    }
+//    @GetMapping("/parametr/{nejm}")
+//    public String sendParam(
+//            Model model,
+//            @RequestParam(name = "nazwa") String nazwa,
+//            @PathVariable(name = "nejm", required = true) String nejm) {
+//        System.out.println(nazwa);
+//
+//        model.addAttribute("nazwa_atr", nazwa);
+//        model.addAttribute("nejm_param", nejm);
+//
+//        return "param";
+//    }
 }

@@ -4,10 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.sda.meetapp.model.dto.EmployeeDto;
 import pl.sda.meetapp.repository.EmployeeRepository;
+import pl.sda.meetapp.service.EmployeeAuthService;
 import pl.sda.meetapp.service.EmployeeService;
 
 import javax.validation.Valid;
@@ -19,13 +21,15 @@ public class UserController {
 
     private EmployeeService employeeService;
     private EmployeeRepository employeeRepository;
+    private EmployeeAuthService employeeAuthService;
 
-    public UserController(EmployeeService employeeService, EmployeeRepository employeeRepository) {
+    public UserController(EmployeeService employeeService, EmployeeRepository employeeRepository,
+                          EmployeeAuthService employeeAuthService) {
         this.employeeService = employeeService;
         this.employeeRepository = employeeRepository;
+        this.employeeAuthService = employeeAuthService;
     }
 
-    // todo: rejestracja - która ma zapisać nowych użytkowników do bazy
     // todo: wylistowanie - metoda do pobierania z serwisu/bazy pracowników i wyświetlenie ich na stronie html
     // todo: ^^^^ th:each - pętla po kolekcji. - listę na oddzielnej stronie html
     @GetMapping("/register")
@@ -33,6 +37,11 @@ public class UserController {
         model.addAttribute("user_register_form", new EmployeeDto());
 
         return "forms/register";
+    }
+
+    @GetMapping("/")
+    public String getIndex() {
+        return "index";
     }
 
     @GetMapping("/login")
@@ -55,5 +64,12 @@ public class UserController {
     @GetMapping("/profile")
     public String getProfile() {
         return "profile";
+    }
+
+
+
+    @ModelAttribute("loggedIn")
+    public boolean getIsLoggedIn() {
+        return employeeAuthService.getLoggedInUser().isPresent();
     }
 }

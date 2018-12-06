@@ -1,6 +1,6 @@
 package pl.sda.meetapp.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -34,5 +34,20 @@ public class EmployeeAuthService implements UserDetailsService {
                     .build();
         }
         throw new UsernameNotFoundException("User not found.");
+    }
+
+    public Optional<Employee> getLoggedInUser(){
+        if (SecurityContextHolder.getContext().getAuthentication() == null ||
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal() == null ||
+                !SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+            return Optional.empty();
+        }
+
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User) {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            return employeeRepository.findByEmail(user.getUsername());
+        }
+
+        return Optional.empty();
     }
 }

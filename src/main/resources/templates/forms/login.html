@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <th:block th:include="template :: scripts_css"/>
+    <th:block th:include="template :: style_css"/>
     <title>MeetApp - Login</title>
 </head>
 <body>
@@ -14,12 +15,18 @@
 <h1>MeetApp</h1>
 <h2>Login</h2>
 
-<form th:href="@{/employee/login}" method="post">
-    <label for="username">Email:</label>
-    <input type="text" name="username" id="username" placeholder="Email">
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" placeholder="Password">
-    <input type="submit" th:value="Submit">
-</form>
+<div class="container">
+    <form th:href="@{/employee/login}" method="post">
+        <div class="row buffer">
+            <label for="username">Email:</label>
+            <input type="text" name="username" id="username" placeholder="Email">
+        </div>
+        <div class="row buffer">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="Password">
+            <input type="submit" th:value="Submit">
+        </div>
+    </form>
+</div>
 </body>
 </html>
