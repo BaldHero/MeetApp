@@ -53,8 +53,8 @@ public class UserController {
     public String postRegisterForm(@Valid EmployeeDto employeeDto, Model model) {
         log.info("Request: " + employeeDto);
         if(employeeService.canIAddEmail(employeeDto)) {
-                employeeService.createEmployee(employeeDto);
-                employeeAuthService.sendNotification(employeeDto);
+            employeeAuthService.sendNotification(employeeDto);
+            employeeService.createEmployee(employeeDto);
             return "redirect:/employee/login";
         }
         model.addAttribute("message", "Registration failed.");
