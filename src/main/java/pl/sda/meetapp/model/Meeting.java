@@ -1,9 +1,6 @@
 package pl.sda.meetapp.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -28,5 +25,6 @@ public class Meeting {
     private LocalDate date;
 
     @ManyToMany(mappedBy = "meetings")
+    @ToString.Exclude
     private List<Employee> employees;
 }

@@ -38,4 +38,7 @@ public class Employee {
     private List<Meeting> meetings;
 
     //...
+    public String printInfo(){
+        return lastName + " " + firstName + " " + department;
+    }
 }

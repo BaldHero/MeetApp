@@ -45,7 +45,7 @@
                 <div class="col-1" th:text="${meeting.name}"></div>
                 <div class="col-6" th:text="${meeting.description}"></div>
                 <div class="col-2" th:text="${meeting.date}"></div>
-                <div class="col-3" th:text="${meeting.employees}"></div>
+                <div class="col-3" th:text="${meeting.employees.get(0).printInfo()}"></div>
             </div>
         </div>
     </div>
