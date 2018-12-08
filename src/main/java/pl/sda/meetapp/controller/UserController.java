@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.sda.meetapp.model.Employee;
 import pl.sda.meetapp.model.dto.EmployeeDto;
 import pl.sda.meetapp.repository.EmployeeRepository;
 import pl.sda.meetapp.service.EmployeeAuthService;
 import pl.sda.meetapp.service.EmployeeService;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -63,7 +65,13 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String getProfile() {
+    public String getProfile(Model model) {
+        Optional<Employee> loggedInUser = employeeAuthService.getLoggedInUser();
+
+        if (loggedInUser.isPresent()) {
+            Employee employee = loggedInUser.get();
+            model.addAttribute("employee", employee.getFirstName() + " " +employee.getLastName());
+        }
         return "profile";
     }
 

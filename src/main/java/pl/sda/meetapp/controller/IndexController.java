@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.sda.meetapp.model.Employee;
 import pl.sda.meetapp.service.EmployeeAuthService;
+
+import java.util.Optional;
 
 @Controller
 public class IndexController {
@@ -19,9 +22,15 @@ public class IndexController {
     }
 
     @GetMapping("/")
-    public String getIndex() {
-        return "index";
+    public String getIndex(Model model) {
+        Optional<Employee> loggedInUser = employeeAuthService.getLoggedInUser();
+
+        if (loggedInUser.isPresent()) {
+            Employee employee = loggedInUser.get();
+            model.addAttribute("employee", employee.getFirstName() + " " +employee.getLastName());
         }
+        return "index";
+    }
 
     @ModelAttribute("loggedIn")
     public boolean getIsLoggedIn() {

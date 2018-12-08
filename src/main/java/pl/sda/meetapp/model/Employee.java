@@ -6,13 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Builder
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "Employee")
 public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,6 +30,12 @@ public class Employee {
 
     @Enumerated(EnumType.STRING)
     private Department department;
+
+    @ManyToMany
+    @JoinTable(name = "EMPLOYEE_MEETING",
+            joinColumns = {@JoinColumn(name = "EMPLOYEE_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "MEETING_ID")})
+    private List<Meeting> meetings;
 
     //...
 }

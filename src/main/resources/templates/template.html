@@ -34,6 +34,7 @@
                 <a sec:authorize="!isAuthenticated()" class="nav-item nav-link" th:href="@{/employee/login}">Login</a>
                 <a sec:authorize="!isAuthenticated()" class="nav-item nav-link" th:href="@{/employee/register}">Register</a>
                 <a sec:authorize="isAuthenticated()" class="nav-item nav-link" th:href="@{/employee/logout}">Logout</a>
+                <a sec:authorize="isAuthenticated()" class="navbar-text" th:href="@{/employee/profile}" th:text="${employee}"></a>
             </div>
         </div>
     </nav>
