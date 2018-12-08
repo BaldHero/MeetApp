@@ -5,7 +5,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import pl.sda.meetapp.model.Employee;
 import pl.sda.meetapp.model.Meeting;
-import pl.sda.meetapp.model.dto.EmployeeDto;
 import pl.sda.meetapp.model.dto.MeetingDto;
 import pl.sda.meetapp.repository.MeetingRepository;
 
@@ -37,6 +36,6 @@ public class MeetingService {
 
     public List<Meeting> printAllByEmail(String email){
 //        return meetingRepository.findAllByEmployees_Email(email);
-        return meetingRepository.findAllByEmployees_Email(email);
+        return meetingRepository.findAllByEmployees_EmailOrderByDate(email);
     }
 }

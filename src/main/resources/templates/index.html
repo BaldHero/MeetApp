@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <th:block th:include="template :: scripts_css"/>
+    <th:block th:include="template :: style_css"/>
     <th:block th:include="template :: navigator"/>
     <title>MeetApp - Homepage</title>
 </head>
@@ -29,8 +30,10 @@
                 <label for="meeting.name">Name:</label>
                 <input th:field="*{name}" id="meeting.name" placeholder="meeting name">
             </div>
+            <div class="row buffer">
                 <label for="meeting.description">Description:</label>
                 <input th:field="*{description}" id="meeting.description" placeholder="meeting description">
+            </div>
             <div class="row buffer">
                 <label for="meeting.date">Date:</label>
                 <input type="date" th:field="*{date}" id="meeting.date" placeholder="date">
@@ -41,9 +44,15 @@
         </form>
 
         <div th:if="${meetings.size() > 0}">
+            <div class="row header marker">
+                <div class="col-3">Meeting</div>
+                <div class="col-4">Agenda</div>
+                <div class="col-2">Date</div>
+                <div class="col-3">Participants</div>
+            </div>
             <div class="row table-row" th:each="meeting : ${meetings}">
-                <div class="col-1" th:text="${meeting.name}"></div>
-                <div class="col-6" th:text="${meeting.description}"></div>
+                <div class="col-3" th:text="${meeting.name}"></div>
+                <div class="col-4" th:text="${meeting.description}"></div>
                 <div class="col-2" th:text="${meeting.date}"></div>
                 <div class="col-3" th:text="${meeting.employees.get(0).printInfo()}"></div>
             </div>
