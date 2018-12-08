@@ -1,33 +1,38 @@
 package pl.sda.meetapp.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.meetapp.model.Employee;
+import pl.sda.meetapp.model.Meeting;
 import pl.sda.meetapp.service.EmployeeAuthService;
+import pl.sda.meetapp.service.MeetingService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class IndexController {
 
     private EmployeeAuthService employeeAuthService;
+    private MeetingService meetingService;
 
-    public IndexController(EmployeeAuthService employeeAuthService) {
+    public IndexController(EmployeeAuthService employeeAuthService, MeetingService meetingService) {
         this.employeeAuthService = employeeAuthService;
+        this.meetingService = meetingService;
     }
 
     @GetMapping("/")
     public String getIndex(Model model) {
         Optional<Employee> loggedInUser = employeeAuthService.getLoggedInUser();
-
+        Meeting meeting = new Meeting();
         if (loggedInUser.isPresent()) {
             Employee employee = loggedInUser.get();
-            model.addAttribute("employee", employee.getFirstName() + " " +employee.getLastName());
+            model.addAttribute("employee", employee.getFirstName() + " " + employee.getLastName());
+            List<Meeting> meetings = meetingService.printAllByEmail(employee.getEmail());
+            model.addAttribute("meetings", meetings);
+            model.addAttribute("meeting", meeting);
         }
         return "index";
     }

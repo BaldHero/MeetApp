@@ -15,11 +15,40 @@
     <p>Please log in or register.</p>
 </div>
 
-<div th:if="${loggedIn}" class="col-2">
-    <!--TODO - welcome message below the navbar or to the left of the logout button-->
-    <!--TODO - list all contacts -->
-    <!--<div class="row table-row" th:each=""-->
-    <p>You're logged in</p>
+<div class="container">
+    <div th:if="${loggedIn}" class="col-12">
+        <!--TODO - list all contacts -->
+        <!--<div class="row table-row" th:each=""-->
+        <p>You're logged in</p>
+        <div th:unless="${meetings.size() != 0}">
+            <p>You're not a member of any planned meeting.</p>
+        </div>
+
+        <form th:action="@{/createMeeting}" method="post" th:object="${meeting}">
+            <div class="row buffer">
+                <label for="meeting.name">Name:</label>
+                <input th:field="*{name}" id="meeting.name" placeholder="meeting name">
+            </div>
+                <label for="meeting.description">Description:</label>
+                <input th:field="*{description}" id="meeting.description" placeholder="meeting description">
+            <div class="row buffer">
+                <label for="meeting.date">Date:</label>
+                <input type="date" th:field="*{date}" id="meeting.date" placeholder="date">
+            </div>
+            <div class="row buffer">
+                <input type="submit" th:value="Submit">
+            </div>
+        </form>
+
+        <div th:if="${meetings.size() > 0}">
+            <div class="row table-row" th:each="meeting : ${meetings}">
+                <div class="col-1" th:text="${meeting.name}"></div>
+                <div class="col-6" th:text="${meeting.description}"></div>
+                <div class="col-2" th:text="${meeting.date}"></div>
+                <div class="col-3" th:text="${meeting.employees}"></div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
