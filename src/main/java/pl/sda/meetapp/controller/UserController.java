@@ -40,11 +40,6 @@ public class UserController {
         return "forms/register";
     }
 
-    @GetMapping("/")
-    public String getIndex() {
-        return "index";
-    }
-
     @GetMapping("/login")
     public String getLoginForm() {
         return "forms/login";
@@ -71,8 +66,6 @@ public class UserController {
     public String getProfile() {
         return "profile";
     }
-
-
 
     @ModelAttribute("loggedIn")
     public boolean getIsLoggedIn() {
