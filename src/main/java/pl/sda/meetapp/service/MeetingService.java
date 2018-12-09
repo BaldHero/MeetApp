@@ -24,6 +24,7 @@ public class MeetingService {
         Meeting meeting = new Meeting();
         BeanUtils.copyProperties(meetingDto, meeting);
         List<Meeting> meetings = employee.getMeetings();
+        meeting.setDate(meeting.getDate().plusDays(1));
         meetings.add(meeting);
         meetingRepository.save(meeting);
         return meetingDto;

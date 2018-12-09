@@ -6,6 +6,7 @@ import pl.sda.meetapp.model.Employee;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -19,7 +20,6 @@ public class MeetingDto {
     @NotBlank
     private String description;
 
-    @NotBlank
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 

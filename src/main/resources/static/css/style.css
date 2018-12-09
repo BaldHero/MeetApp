@@ -1,10 +1,28 @@
+.h2 {
+    text-align: center;
+}
+
 .buffer {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .marker {
+    font-weight: bold;
     margin-top: 20px;
-    margin-bottom: 20px;
-    background: aqua;
+    background: #D7FF6E;
+    text-align: center;
+    padding: 30px;
+}
+
+.table-row:nth-child(odd) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #BEE2E5;
+}
+
+.table-row:nth-child(even) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #D4FBFF;
 }
