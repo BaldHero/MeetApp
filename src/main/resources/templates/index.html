@@ -11,10 +11,12 @@
     <title>MeetApp - Homepage</title>
 </head>
 <body>
-<h2>Welcome to MeetApp</h2>
 
-<div th:unless="${loggedIn}" class="col-2">
-    <p>Please log in or register.</p>
+<div class="messages">
+    <h2>Welcome to MeetApp</h2>
+    <div th:unless="${loggedIn}" class="col-2">
+        <p>Please log in or register.</p>
+    </div>
 </div>
 
 <div class="container">

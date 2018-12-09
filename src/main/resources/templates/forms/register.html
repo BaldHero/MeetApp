@@ -13,8 +13,12 @@
 <th:block th:include="template :: navigator"/>
 <th:block th:include="template :: messageBox"/>
 
-<h1>MeetApp</h1>
-<h2>User registration</h2>
+<div class="messages">
+    <div>
+        <h1>MeetApp</h1>
+        <h2>User registration</h2>
+    </div>
+</div>
 
 <div class="container">
     <form th:action="@{/employee/register}" method="post" th:object="${user_register_form}">
