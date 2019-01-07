@@ -1,11 +1,9 @@
 package pl.sda.meetapp.model;
 
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @Builder

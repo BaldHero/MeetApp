@@ -13,7 +13,7 @@
 <body>
 
 <div class="messages">
-    <h2>Welcome to MeetApp</h2>
+    <h1>Welcome to MeetApp</h1>
     <div th:unless="${loggedIn}" class="col-2">
         <p>Please log in or register.</p>
     </div>
@@ -35,7 +35,7 @@
             </div>
             <div class="row buffer">
                 <label for="meeting.description">Description:</label>
-                <input th:field="*{description}" id="meeting.description" placeholder="meeting description">
+                <input th:field="*{description}" id="meeting.description" size="90" placeholder="meeting description">
             </div>
             <div class="row buffer">
                 <label for="meeting.date">Date:</label>
